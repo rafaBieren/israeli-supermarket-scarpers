@@ -9,14 +9,6 @@ def test_stable_scraper():
     )
 
 
-# def test_after_date():
-#     """test scrapers that failed after date"""
-#     assert ScraperStability.is_validate_scraper_found_no_files(
-#         ScraperFactory.CITY_MARKET_GIVATAYIM.name,
-#         when_date=datetime_in_tlv(2024, 12, 12, 0, 0, 0),
-#     )
-
-
 def test_not_active():
     """test grap between active and not"""
     all_listed = ScraperFactory.all_listed_scrappers()
@@ -24,8 +16,6 @@ def test_not_active():
         when_date=datetime_in_tlv(2024, 12, 12, 0, 0, 0)
     )
 
+    # No chains should be disabled by default in the reduced set
     expected_to_fail = 0
-    if _is_saturday_in_israel():
-        expected_to_fail += 1  # only 'NetivHased' should
-
     assert len(set(all_listed) - set(all_active)) == expected_to_fail
